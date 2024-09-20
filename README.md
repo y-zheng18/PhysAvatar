@@ -1,6 +1,8 @@
-# PhysAvatar
+# PhysAvatar: Learning the Physics of Dressed 3D Avatars from Visual Observations 
 
 ![teaser](assets/teaser.png)
+[[Paper]](https://arxiv.org/abs/2404.04421) [[Project Page]](https://qingqing-zhao.github.io/PhysAvatar
+)
 ### News
 * Released the code for mesh tracking, garment physical parameter estimation, and test time animation.
 ### TODO
@@ -56,4 +58,19 @@ python run_sim_actorhq.py
 For motion in AMASS dataset, run:
 ```bash
 python run_sim_amass.py --motion_path ./data/AMASS/MoSh/50020/shake_hips_stageii.npz --frame_num 50
+```
+# Citation
+If you use this code or our data for your research, please cite:
+
+PhysAvatar: Learning the Physics of Dressed 3D Avatars from Visual Observations. Yang Zheng, Qingqing Zhao, Guandao Yang, Wang Yifan, Donglai Xiang, Florian Dubost, Dmitry Lagun, Thabo Beeler, Federico Tombari, Leonidas Guibas, Gordon Wetzstein. In ECCV 2024.
+
+Bibtex:
+
+```bibtex
+@inproceedings{PhysAavatar24,
+    title={PhysAvatar: Learning the Physics of Dressed 3D Avatars from Visual Observations},
+    author={Yang Zheng and Qingqing Zhao and Guandao Yang and Wang Yifan and Donglai Xiang and Florian Dubost and Dmitry Lagun and Thabo Beeler and Federico Tombari and Leonidas Guibas and Gordon Wetzstein}
+    journal={European Conference on Computer Vision (ECCV)},
+    year={2024}
+}
 ```
