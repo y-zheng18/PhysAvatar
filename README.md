@@ -15,6 +15,7 @@ We suggest to use conda with mamba to set up the environment. The following comm
 mamba env create -f environment.yml
 conda activate phys_avatar
 # install gaussian rasterization
+git clone https://github.com/JonathonLuiten/diff-gaussian-rasterization-w-depth.git
 cd diff-gaussian-rasterization-w-depth
 python setup.py install
 pip install .
