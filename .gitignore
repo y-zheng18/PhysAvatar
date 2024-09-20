@@ -4,7 +4,6 @@ output/
 sim_input/
 sim_output/
 *wandb/
-*.png
 *.npz
 *.zip
 .DS_Store
