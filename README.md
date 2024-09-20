@@ -1,1 +1,59 @@
 # PhysAvatar
+
+![teaser](assets/teaser.png)
+### News
+* Released the code for mesh tracking, garment physical parameter estimation, and test time animation.
+### TODO
+* Release the code for apperance fitting and rendering.
+* Release the tutorial for animating the character using MIXAMO data.
+## Quick Start
+### Installation
+We suggest to use conda with mamba to set up the environment. The following commands will create a new conda environment with required dependencies installed.
+```bash
+mamba env create -f environment.yml
+conda activate phys_avatar
+# install gaussian rasterization
+cd diff-gaussian-rasterization-w-depth
+python setup.py install
+pip install .
+# install Codim-IPC
+cd Codim-IPC
+python build.py
+```
+Download our [pre-processed data](https://drive.google.com/file/d/1N8xQtnG6supLulLPr0IQa9TuN2FHrgBt/view?usp=sharing) (cloth mesh, fitted SMPLX model) for Actor1 from ActorsHQ dataset. 
+Download [ActorsHQ dataset](https://actors-hq.com/) (Actor1, Sequence 1, 4x downsampling videos) under the `data` folder. 
+Download [SMPLX npz and pkl files](https://download.is.tue.mpg.de/download.php?domain=smplx&sfile=models_smplx_v1_1.zip) and [VPoser pretrained weights](https://download.is.tue.mpg.de/download.php?domain=smplx&sfile=vposer_v1_0.zip), and put them under `data` folder, following the structure as `data/body_models/smplx/*.npz` and `data/body_models/TR00_E096.pt`.
+
+### Mesh Tracking
+```bash
+bash scripts/train_mesh_lbs.sh
+```
+We suggest using [wandb](https://wandb.ai/home) to visualize the training process. Replace `--wandb_entity xxxx` in the bash file with your wandb entity.
+
+### Garment Physical Parameter Estimation
+We first extract the garment mesh from the mesh tracking results:
+```bash
+python extract_cloth.py --train_dir ./output/exp1_cloth/a1_s1_460_200 --seq a1_s1 --cloth_name cloth_sim.obj
+```
+Then we estimate the physical parameters:
+```bash
+bash scripts/phys_param_estimation.sh
+```
+Note that in the simulation we manually segment out the garment from the fullbody mesh (`data/a1_s1/cloth_sim`) and define the boundry condition points which drives the simulation. We provide the boundry condition points (`data/a1_s1/dress_v.txt`) for Actor1. 
+
+If you are working on custom data, you need to prepare those files yourself. Following [data preparation](data/README.md) for more details.
+
+### Animation
+We first compute the LBS weights for the fullbody mesh using algorithm described in [Robust Skin Weights Transfer via Weight Inpainting](https://www.dgp.toronto.edu/~rinat/projects/RobustSkinWeightsTransfer/index.html):
+```bash
+python lbs_weights_inpainting.py
+```
+The optimized weights are saved in `data/a1_s1/optimized_weights.npy`. 
+We use the weights to animate human body, and the garment dynamics are simulated by Codim-IPC. For motions from ActorsHQ dataset, run:
+```bash
+python run_sim_actorhq.py
+``````
+For motion in AMASS dataset, run:
+```bash
+python run_sim_amass.py --motion_path ./data/AMASS/MoSh/50020/shake_hips_stageii.npz --frame_num 50
+```
