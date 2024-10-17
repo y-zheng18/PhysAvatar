@@ -1,0 +1,13 @@
+name: mi_renderer
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8.20
+  - pip=22.3.1
+  - tqdm=4.65.0
+  - pip:
+    - trimesh==4.0.1
+    - mitsuba==3.5.2
+    - opencv-python==4.8.0.76
+    - scipy==1.7.3

@@ -1,5 +1,6 @@
 import argparse
-import glob 
+import glob
+import os
 import numpy as np
 import trimesh 
 from mi_opt_util import interpolate_vertex_colors
@@ -29,7 +30,7 @@ def main(args):
     f = mesh.faces
 
     # Load all npz files
-    paths = sorted(glob.glob(args.npz_path + "*.npz"))
+    paths = sorted(glob.glob(os.path.join(args.npz_path, "*.npz")))
     colors = []
     vertices = []
     print(paths[0])
@@ -42,7 +43,7 @@ def main(args):
 
     mesh = trimesh.Trimesh(vertices=vertices[0], faces=face)
     print(vertices[0].shape)
-    write_obj(f"{args.output_dir}{args.name}export_mi.obj", vertices[0], face)
+    write_obj(f"{args.output_dir}/{args.name}_export_mi.obj", vertices[0], face)
     face = face.reshape(-1)
     _, idx = np.unique(face, return_index=True)
     order = face[np.sort(idx)]
@@ -51,7 +52,7 @@ def main(args):
 
     mesh = mi.load_dict({
         "type": "obj",
-        "filename": f"{args.output_dir}{args.name}export_mi.obj",
+        "filename": f"{args.output_dir}/{args.name}_export_mi.obj",
         "face_normals": True,
     })
     params = mi.traverse(mesh)
@@ -65,7 +66,7 @@ def main(args):
     faces = np.array(params['faces']).reshape(-1,3)
     mesh_reordered = trimesh.Trimesh(vertices=vertices, faces=faces)
     mesh_reordered.visual.vertex_colors = color[order]
-    mesh_reordered.export(f"{args.output_dir}{args.name}export_colored_mi_reorder.ply")
+    mesh_reordered.export(f"{args.output_dir}/{args.name}_export_colored_mi_reorder.ply")
 
 if __name__ == "__main__":
     args = parse_args()

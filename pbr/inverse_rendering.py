@@ -27,7 +27,7 @@ def parse_args():
     parser.add_argument("--eval_cam", type=int, default=6, help="Evaluation camera index")
     parser.add_argument("--plot", action="store_true", help="Plot images")
     parser.add_argument("--cam_num", type=int, default=160, help="Number of cameras")
-    parser.add_argument("--initial_frame", type=int, default=409, help="Initial frame")
+    parser.add_argument("--initial_frame", type=int, default=460, help="Initial frame")
     parser.add_argument("--exp_name", type=str, default='exp1_cloth', help="Experiment name")
     parser.add_argument("--save_name", type=str, default='a1_s1', help="Save name")
     parser.add_argument('--data_path', type=str, default='../data/ActorsHQ', help="Path to data")
@@ -45,8 +45,8 @@ def main(args):
     # Set up paths for actor data
     actor = f"a{args.actor_idx}"
     actor_ = f"Actor0{args.actor_idx}"
-    obj_path = f"./data/{actor}/{actor}s1_uv.obj"
-    uv_path = f"./data/{actor}/{actor}s1_uv.png"
+    obj_path = f"./data/{actor}_s1/{actor}s1_uv.obj"
+    uv_path = f"./data/{actor}_s1/{actor}s1_uv.png"
 
     # Downsample UV texture if needed
     texture_img = cv2.imread(uv_path)
@@ -68,8 +68,8 @@ def main(args):
         cameras = cd.read_calibration_csv(f"{datapath}/4x/calibration_4x.csv")
     except:
         cameras = cd.read_calibration_csv(f"{datapath}/4x/calibration.csv")
-        for i in cam_num_list:
-            cameras[i] = cameras[i].get_downscaled_camera(4)
+        # for i in cam_num_list:
+        #     cameras[i] = cameras[i].get_downscaled_camera(4)
     
     # Load vertices and faces
     paths = sorted(glob.glob(path + "*.npz"))
