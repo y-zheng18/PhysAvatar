@@ -35,5 +35,7 @@ To run the inverse rendering process, follow these steps using the ActorsHQ data
        --save_name a1_s1_460_200 \
        --data_path ./data/ActorsHQ/ \
        --gsplat_path ./output \
-       --frame_num 5
+       --frame_num 5 \
+       --plot
    ```
+Optimized texture maps will be saved in the `./data/a1/a1s1_uv_pbr_5_0_160_1_2048/texture` directory. The texture map can be used for rendering using Mitsuba, Blender, and other rendering engines.

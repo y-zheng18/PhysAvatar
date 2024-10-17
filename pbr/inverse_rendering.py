@@ -270,10 +270,10 @@ def main(args):
         print(f"Iteration {it:02d}; loss = {loss}", end='\r')
         
         # Save intermediate results
-        if it % 100 == 0 and args.plot:
+        if (it + 1) % 100 == 0 and args.plot:
             mi.util.write_bitmap(f"{folder}/image/image{it}_{camera_index}_{frame_index}.png", image * mask_map)
             mi.util.write_bitmap(f"{folder}/image/image_gt_{camera_index}_{frame_index}.png", image_gt * mask_map)
-        if it % 100 == 0:
+        if (it + 1) % 100 == 0:
             print('\nOptimization complete.')
             color = np.array(params[key])
             np.save(f"{folder}/param/params_optimize_{it:06}.npy", color)
