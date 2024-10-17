@@ -5,8 +5,9 @@
 )
 ### News
 * Released the code for mesh tracking, garment physical parameter estimation, and test time animation.
-### TODO
 * Release the code for apperance fitting and rendering.
+
+### TODO
 * Release the tutorial for animating the character using MIXAMO data.
 ## Quick Start
 ### Installation
@@ -60,6 +61,10 @@ For motion in AMASS dataset, run:
 ```bash
 python run_sim_amass.py --motion_path ./data/AMASS/MoSh/50020/shake_hips_stageii.npz --frame_num 50
 ```
+
+### Inverse Rendering
+check `pbr/README.md` for more details.
+
 # Citation
 If you use this code or our data for your research, please cite:
 
