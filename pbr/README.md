@@ -1,4 +1,4 @@
-# PhysAvatar PBR (Physically Based Rendering) Module
+# PhysAvatar PBR (Physically Based Inverse Rendering) Module
 
 This module contains scripts for inverse rendering and optimization of 3D human avatars using Mitsuba 3.
 
