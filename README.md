@@ -7,8 +7,9 @@
 * Released the code for mesh tracking, garment physical parameter estimation, and test time animation.
 * Release the code for apperance fitting and rendering.
 
-### TODO
-* Release the tutorial for animating the character using MIXAMO data.
+[//]: # (### TODO)
+
+[//]: # (* Release the tutorial for animating the character using MIXAMO data.)
 ## Quick Start
 ### Installation
 We suggest to use conda with mamba to set up the environment. The following commands will create a new conda environment with required dependencies installed.
@@ -62,9 +63,21 @@ For motion in AMASS dataset, run:
 python run_sim_amass.py --motion_path ./data/AMASS/MoSh/50020/shake_hips_stageii.npz --frame_num 50
 ```
 
-### Inverse Rendering
-check `pbr/README.md` for more details.
+For motion in other formats, we take MIXAMO data as an example. 
+The basic logic is to obtain the animated mesh sequences of garment and the underlining human body, 
+and the rest is simulation part which is discussed as above. 
+To use mixamo motion, follow these instructions: 
+(a) combine the human mesh and smplx in blender into single mesh and export to obj; 
+(b) upload the obj mesh to mixamo, use auto rigging to rig it, then choose any motion to animate the sequence, and download the fbx file; 
+(c) import fbx file to blender, separate the human mesh and smplx mesh, export the obj sequences; (d) extract garment part from the full-body human mesh sequence, and use the garment and smplx mesh for simulation.
 
+
+### Inverse Rendering
+Check `pbr/README.md` for more details.
+
+## Evaluation
+Find all the preprocessed data [here](https://drive.google.com/drive/folders/1Fl_WqNXAnZbAOHJwbcav5FYvFSLbh6OQ). 
+Use Cam007 and Cam127 for evaluation, and the first 200 frames for training and the next 200 frames for evaluation (where the first frame idx is related to the FrameRec{start_id}.obj file).  
 # Citation
 If you use this code or our data for your research, please cite:
 
