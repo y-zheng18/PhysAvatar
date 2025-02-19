@@ -77,7 +77,7 @@ Check `pbr/README.md` for more details.
 
 ## Evaluation
 Find all the preprocessed data [here](https://drive.google.com/drive/folders/1Fl_WqNXAnZbAOHJwbcav5FYvFSLbh6OQ). 
-Use Cam007 and Cam127 for evaluation, and the first 200 frames for training and the next 200 frames for evaluation (where the first frame idx is related to the FrameRec{start_id}.obj file).  
+Use Cam007 and Cam127 for evaluation, and the first 200 frames for training and the next 200 frames for evaluation where the first frame idx is related to the FrameRec{start_id}.obj file (except for the Actor 3 sequence where we don't use frames after 720 since our SMPLX estimation is not accurate due to large occlusions).  
 # Citation
 If you use this code or our data for your research, please cite:
 
